@@ -11,12 +11,11 @@ interface InfoItem {
   id?: string;
   title: string;
   content: string;
-  createdAt?: any; // Firestore timestamp
-  updatedAt?: any; // Firestore timestamp
+  createdAt?: any; 
+  updatedAt?: any; 
 }
 
 export default function Home() {
-  // For current time
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -27,10 +26,8 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  // Use the custom hook to get real-time data
   const { data: infoItems, loading, error } = useRealtime<InfoItem>("info");
 
-  // Format timestamp
   const formatTimestamp = (timestamp: any) => {
     if (!timestamp) return "N/A";
     try {
@@ -43,7 +40,6 @@ export default function Home() {
     }
   };
 
-  // Sort items by updatedAt timestamp (newest first)
   const sortedItems = [...infoItems].sort((a, b) => {
     if (!a.updatedAt && !b.updatedAt) return 0;
     if (!a.updatedAt) return 1;
@@ -51,7 +47,6 @@ export default function Home() {
     return b.updatedAt.seconds - a.updatedAt.seconds;
   });
 
-  // System stats
   const stats = [
     { value: infoItems.length, label: "Total Updates" },
     {
@@ -64,7 +59,6 @@ export default function Home() {
     { value: "100%", label: "Uptime" },
   ];
 
-  // Features
   const features = [
     {
       title: "Real-Time Updates",
@@ -154,11 +148,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#050816] text-white">
-      {/* Background pattern - similar to the image */}
       <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
         <div className="absolute right-0 w-full h-full">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-green-500/10 to-transparent transform rotate-45"></div>
-          {/* Create grid dots pattern */}
           <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiMwMGZmMDAiLz48L3N2Zz4=')]"></div>
         </div>
       </div>

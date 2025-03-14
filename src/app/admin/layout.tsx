@@ -1,19 +1,28 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    document.cookie =
+      "atlas-admin-access=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    router.push("/");
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-[#050816]">
-      {/* Background pattern - similar to the image */}
       <div className="fixed inset-0 overflow-hidden opacity-20 pointer-events-none">
         <div className="absolute right-0 w-full h-full">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-green-500/10 to-transparent transform rotate-45"></div>
-          {/* Create grid dots pattern */}
           <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiMwMGZmMDAiLz48L3N2Zz4=')]"></div>
         </div>
       </div>
@@ -41,11 +50,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               </Link>
               <Button
                 className="bg-black border border-red-500/50 text-red-400 hover:bg-red-950/30 transition-all duration-300"
-                onClick={() => {
-                  document.cookie =
-                    "atlas-admin-access=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
-                  window.location.href = "/";
-                }}
+                onClick={handleLogout}
               >
                 Logout
               </Button>

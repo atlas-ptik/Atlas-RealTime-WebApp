@@ -19,27 +19,23 @@ export default function LockPage() {
   const [inputCode, setInputCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Generate random 8-digit code when page loads or refreshes
   useEffect(() => {
     const newCode = Array.from({ length: 8 }, () =>
       Math.floor(Math.random() * 10)
     ).join("");
     setAccessCode(newCode);
-    console.log("Access code generated:", newCode); // For easier testing
+    console.log("Access code generated:", newCode); // 
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Check if input matches access code
     if (inputCode === accessCode) {
-      // Set a cookie to grant admin access
-      document.cookie = "atlas-admin-access=true; path=/; max-age=3600"; // Expires after 1 hour
+      document.cookie = "atlas-admin-access=true; path=/; max-age=3600"; 
 
       toast.success("Access granted! Redirecting to admin dashboard...");
 
-      // Redirect to admin dashboard after a brief delay
       setTimeout(() => {
         router.push("/admin");
       }, 1000);
@@ -52,11 +48,9 @@ export default function LockPage() {
 
   return (
     <div className="min-h-screen bg-[#050816] flex items-center justify-center p-4">
-      {/* Background pattern - similar to the image */}
       <div className="fixed inset-0 overflow-hidden opacity-20 pointer-events-none">
         <div className="absolute right-0 w-full h-full">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-green-500/10 to-transparent transform rotate-45"></div>
-          {/* Create grid dots pattern */}
           <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiMwMGZmMDAiLz48L3N2Zz4=')]"></div>
         </div>
       </div>

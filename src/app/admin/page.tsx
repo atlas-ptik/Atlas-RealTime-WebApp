@@ -20,7 +20,6 @@ import { toast } from "sonner";
 import { addDocument, updateDocument, deleteDocument } from "@/lib/firestore";
 import { useRealtime } from "@/hooks/useRealtime";
 
-// Define information item interface
 interface InfoItem {
   id?: string;
   title: string;
