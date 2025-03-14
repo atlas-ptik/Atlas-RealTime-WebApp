@@ -3,16 +3,16 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useRealtime } from "@/hooks/useRealtime";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/layouts/navbar";
 
 // Define information item interface
 interface InfoItem {
   id?: string;
   title: string;
   content: string;
-  createdAt?: any; 
-  updatedAt?: any; 
+  createdAt?: any;
+  updatedAt?: any;
 }
 
 export default function Home() {
@@ -101,8 +101,8 @@ export default function Home() {
       ),
     },
     {
-      title: "Advanced Analytics",
-      description: "Monitor system performance and usage",
+      title: "Cross-Platform",
+      description: "Web and Android app for real-time access anywhere",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export default function Home() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
           />
         </svg>
       ),
@@ -156,28 +156,7 @@ export default function Home() {
       </div>
 
       {/* Header Navigation */}
-      <header className="relative z-10 border-b border-green-500/20">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
-                Atlas <span className="text-white">System</span>
-              </h1>
-            </div>
-            <nav className="flex items-center space-x-6">
-              <span className="text-sm text-gray-400">
-                {currentTime.toLocaleTimeString()}
-              </span>
-              <Link href="/lock" passHref>
-                <Button className="bg-black border border-green-500 text-green-500 hover:bg-green-950 transition-all duration-300">
-                  Admin Dashboard
-                </Button>
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
@@ -203,8 +182,11 @@ export default function Home() {
               <Button className="bg-green-500 hover:bg-green-600 text-black font-medium px-6 py-2.5 rounded-full">
                 View Updates
               </Button>
-              <Button className="bg-transparent border border-green-500 text-green-400 hover:bg-green-950 px-6 py-2.5 rounded-full">
-                Learn More
+              <Button
+                className="bg-transparent border border-green-500 text-green-400 hover:bg-green-950 px-6 py-2.5 rounded-full"
+                onClick={() => (window.location.href = "/download")}
+              >
+                Download App
               </Button>
             </div>
           </div>
@@ -278,7 +260,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sortedItems.map((item, index) => (
+              {sortedItems.map((item) => (
                 <Card
                   key={item.id}
                   className="bg-black/40 backdrop-blur-sm border border-green-500/30 overflow-hidden group hover:border-green-500/60 transition-all duration-300"
